@@ -2,7 +2,7 @@ import json
 import argparse
 
 def main():
-    parser = argparse.ArgumentParser(description="A simple CLI todo app")
+    parser = argparse.ArgumentParser(description="My CLI Todo Manager")
     subparsers = parser.add_subparsers(dest="command")
 
     add_parser = subparsers.add_parser("add", help="Add a new task")
