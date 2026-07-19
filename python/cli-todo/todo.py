@@ -7,6 +7,7 @@ def main():
 
     add_parser = subparsers.add_parser("add", help="Add a new task")
     add_parser.add_argument("task", help="The task description")
+    list_parser = subparsers.add_parser("list", help="List all tasks")
 
     args = parser.parse_args()
     if args.command == "add":
@@ -15,7 +16,14 @@ def main():
         tasks.append({"id": new_id, "task": args.task, "done": False})
         save_tasks("tasks.json", tasks)
         print(f"Added task: {args.task}")
-
+    elif args.command == "list":
+        tasks = load_tasks("tasks.json")
+        if not tasks:
+            print("No tasks yet.")
+        else:
+            for task in tasks:
+                status = "✓" if task["done"] else "✗"
+                print(f"[{status}] {task['id']}: {task['task']}")
 
 def load_tasks(filename):
 
