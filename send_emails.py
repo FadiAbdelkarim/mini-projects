@@ -2,6 +2,8 @@ import csv
 import smtplib
 from email.message import EmailMessage
 
+
+
 def main():
     emails_list = get_recipients("emails.csv")
     for r in emails_list:
@@ -18,7 +20,7 @@ def main():
         msg = build_message(credentials["email"], row, "Send Emails from CSV File mini project", "this is a test message")
         messages_list.append(msg)
         print(msg)
-    send_messages(credentials["email"], credentials["password"], messages_list)
+    send_messages(credentials["email"], credentials["password"], messages_list, dry_run = True )
 
 def get_recipients(filename):
     emails_list = []
@@ -36,19 +38,23 @@ def get_credentials(filename):
 
 
 def build_message(sender, recipient, subject, body):
-    msg = EmailMessage()
-    msg['Subject'] = subject
-    msg['From'] = sender
-    msg['To'] = recipient
-    msg.set_content(body)
-    return msg
+    
+        msg = EmailMessage()
+        msg['Subject'] = subject
+        msg['From'] = sender
+        msg['To'] = recipient
+        msg.set_content(body)
+        return msg
+    
 
 
-def send_messages(sender_email, sender_password, messages):
+def send_messages(sender_email, sender_password, messages, dry_run):
 
-    for msg in messages:
-        print(f"Simulated send to: {msg['To']}")
-   
+    if dry_run:
+        for msg in messages:
+            print(f"Simulated send to: {msg['To']}")
+    else:
+        print("Would connect to SMTP here")
 
 if __name__ == "__main__":
     main() 
