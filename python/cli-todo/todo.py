@@ -2,7 +2,9 @@ import json
 import argparse
 
 def main():
+
     parser = argparse.ArgumentParser(description="Task Manager Pro")
+
     subparsers = parser.add_subparsers(dest="command")
 
     add_parser = subparsers.add_parser("add", help="Add a new task")
