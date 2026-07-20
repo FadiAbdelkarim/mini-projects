@@ -1,9 +1,18 @@
 import datetime
+import subprocess
+import time 
 
 def main():
-    get_alarm_time()
-    get_alarm_sound()
+    print("###########################")
+    print("###### Alarm Program ######")
+    print("###########################\n")
 
+    alarm_time = get_alarm_time()
+    sound_path = get_alarm_sound()
+
+    print(f"\n>>> Alarm has been set successfully for {alarm_time.strftime('%H:%M')}! Please don't close the program! <<<\n")
+
+    wait_and_play(alarm_time, sound_path)
 
 
 def get_alarm_time():
@@ -27,6 +36,17 @@ def get_alarm_sound():
             chosen_sound = sound_list[int(choice) - 1]
             return f"/System/Library/Sounds/{chosen_sound}.aiff"
         print("Invalid choice. Please enter a valid number.")
+
+
+def wait_and_play(alarm_time, sound_path):
+    while True:
+        if alarm_time <= datetime.datetime.now().time():
+            subprocess.run(["afplay", sound_path])
+            break
+        time.sleep(1)
+
+
+
 
 if __name__ == "__main__":
     main()
