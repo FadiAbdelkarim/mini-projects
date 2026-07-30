@@ -1,7 +1,7 @@
 # Set Alarm
 
 This script lets you set an alarm and plays your selected music after the selected time.
-**THIS SCRIPT ONLY WORKS ON WINDOWS**
+**THIS SCRIPT ONLY WORKS ON MAC**
 
 ### Usage
 ```
